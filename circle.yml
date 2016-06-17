@@ -2,10 +2,17 @@ machine:
     python:
         version: 3.4.4
 
+    services:
+      - docker
+
+    environment:
+      CIRCLE_ENV: testing
+      DATABASE_DSN: '... this is fake dsn ...'
+
 dependencies:
     pre:
-        - pip install -r tests/requirements.txt
+        - docker build -t nginx-build:$CIRCLE_SHA1 .build
 
 test:
     override:
-        - py.test .
+        - docker images | grep nginx-build
