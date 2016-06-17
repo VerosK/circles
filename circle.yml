@@ -1,0 +1,11 @@
+machine:
+    python:
+        version: python3.4
+
+dependencies:
+    pre:
+        - pip install -r test/requirements.txt
+
+test:
+    override:
+        - py.test .
